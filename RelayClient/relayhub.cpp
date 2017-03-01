@@ -33,10 +33,17 @@ void RelayHub::start()
     emit statusChanged(_statusStr);
 
     //connect(this, &QTcpServer::newConnection, this, &RelayHub::receiveNewConnection);
+
+    // create thread pool
+    for (int i = 0; i < _threadNum; ++i) {
+        std::shared_ptr<WorkThread> threadSptr = std::make_shared<WorkThread>();
+        _workThreadMap.insert(std::make_pair(i, threadSptr));
+    }
 }
 
 void RelayHub::incomingConnection(qintptr handle)
 {
+    connect(this, &RelayHub::newConnection, _workThreadMap[_assignThreadNum]->getWorkFuncPtr(), &WorkFunc::registSocket);
     //std::shared_ptr<TcpConnThread> threadSptr = std::make_shared<TcpConnThread>(handle);
     //QThread *threadPtr = threadSptr.get();
     //_connThreadMap.insert(std::make_pair(handle, threadSptr));
@@ -46,11 +53,11 @@ void RelayHub::incomingConnection(qintptr handle)
 
 void RelayHub::connThreadExited(int sockfd)
 {
-    _connThreadMap.erase(sockfd);
+    //_connThreadMap.erase(sockfd);
 }
 
 RelayHub::~RelayHub()
 {
     this->close();
-    _connThreadMap.clear();
+    //_connThreadMap.clear();
 }

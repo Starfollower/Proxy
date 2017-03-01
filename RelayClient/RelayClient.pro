@@ -18,17 +18,17 @@ SOURCES += main.cpp\
     tcpconnthread.cpp \
     socks5.cpp \
     logger.cpp \
-    accptor.cpp \
     workthread.cpp \
-    tcpconnection.cpp
+    tcpconnection.cpp \
+    accptor.cpp
 
 HEADERS  += mainwindow.h \
     relayhub.h \
     tcpconnthread.h \
     socks5.h \
     logger.h \
-    accptor.h \
     workthread.h \
-    tcpconnection.h
+    tcpconnection.h \
+    accptor.h
 
 FORMS    += mainwindow.ui

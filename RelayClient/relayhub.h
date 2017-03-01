@@ -2,6 +2,7 @@
 #define RELAYHUB_H
 
 #include "tcpconnthread.h"
+#include "workthread.h"
 
 #include <QObject>
 #include <QTcpServer>
@@ -23,7 +24,7 @@ public:
     QString status();
 signals:
     void statusChanged(QString statusStr);
-    void acceptConnection(qintptr handle);
+    void newConnection(qintptr handle);
 protected:
     void incomingConnection(qintptr handle) Q_DECL_OVERRIDE;
 private slots:
@@ -32,11 +33,13 @@ private slots:
 private:
     const uint8_t _threadNum = 3;
     const quint16 _serverPort = 22222;
+    uint8_t _assignThreadNum = 0;
     quint16 _backendPort = 22222;
     QString _backendIp;
     QTcpSocket _backend;
     QString _statusStr;
-    std::map<int, std::shared_ptr<TcpConnThread>> _connThreadMap;
+    //std::map<int, std::shared_ptr<TcpConnThread>> _connThreadMap;
+    std::map<int, std::shared_ptr<WorkThread>> _workThreadMap;
 };
 
 #endif // RELAYHUB_H
