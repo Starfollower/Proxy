@@ -63,7 +63,7 @@ bool Socks5::communication(const std::shared_ptr<QTcpSocket> &socketPtr)
         _IPV4[2] = receiveBuf[6];
         _IPV4[3] = receiveBuf[7];
         std::copy(receiveBuf.data() + 8, receiveBuf.data() + 10, &_dstPort);
-        _ATYPType = ATYP::IPV4;
+        _ATYPType = ADDRTYPE::IPV4;
         break;
     }
     case domainCode: {
@@ -71,7 +71,7 @@ bool Socks5::communication(const std::shared_ptr<QTcpSocket> &socketPtr)
         _domainAddr = QString::fromLocal8Bit(receiveBuf.data() + 5, len);
         //std::copy(receiveBuf.data() + 5 + len, receiveBuf.data() + 7 + len, &_dstPort);
         _dstPort = receiveBuf[5+len] << 8 | receiveBuf[6+len];
-        _ATYPType = ATYP::DOMAINNAME;
+        _ATYPType = ADDRTYPE::DOMAINNAME;
         break;
     }
     case IPV6Code:
