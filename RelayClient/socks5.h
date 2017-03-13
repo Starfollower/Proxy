@@ -6,16 +6,16 @@
 
 class Socks5
 {
-    enum ATYP {IPV4, DOMAINNAME, IPV6};
+    enum ADDRTYPE {IPV4, DOMAINNAME, IPV6};
 public:
     Socks5();
     bool communication(const std::shared_ptr<QTcpSocket> &socketPtr);
-    inline ATYP dstAddrType() { return _ATYPType; }
+    inline ADDRTYPE dstAddrType() { return _ATYPType; }
 private:
     char _IPV4[4];
     quint16 _dstPort;
     QString _domainAddr;
-    enum ATYP _ATYPType;
+    enum ADDRTYPE _ATYPType;
 };
 
 #endif // SOCKS5_H
