@@ -3,3 +3,7 @@
 ################################################################################
 
 /RelayClient/x64/Debug
+/RelayClient/release
+/build-RelayClient-Desktop_Qt_5_10_0_MSVC2017_64bit-Debug
+/RelayClient/debug
+/RelayClient/.vs/RelayClient/v15

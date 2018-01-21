@@ -2,12 +2,35 @@
 #define TCPCONNECTION_H
 
 #include <QTcpSocket>
+#include <memory>
 
+//using ConnectionCallback = std::function<void (const QTcpSocket &)>;
 
-class TcpConnection
+class TcpConnection : public QObject, public std::enable_shared_from_this<TcpConnection>
 {
+    Q_OBJECT
+
 public:
-    TcpConnection();
+	using ReadCallback = std::function<void(std::shared_ptr<TcpConnection>)>;
+	//using WriteCallback = std::function<void(TcpConnection &)>;
+public:
+    TcpConnection(const std::shared_ptr<QTcpSocket> &);
+    void setReadCallback(std::function<void(std::shared_ptr<TcpConnection>)> cb) { _readCb = cb; }
+	QByteArray readAll() { return _socket->readAll(); }
+	std::shared_ptr<TcpConnection> getSharedPtr() { return shared_from_this(); }
+private slots:
+    //void handleNewConnection(qintptr socket);
+    void handleRead();
+    //void handleWrite();
+    void handleError();
+    //void handleClose();
+
+private:
+    int _socketfd;
+    std::shared_ptr<QTcpSocket> _socket;
+    //ConnectionCallback _connectionCb;
+	//std::function<void(TcpConnection &)> _readCb;
+	ReadCallback _readCb;
 };
 
 #endif // TCPCONNECTION_H

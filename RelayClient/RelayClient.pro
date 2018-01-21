@@ -20,7 +20,6 @@ SOURCES += main.cpp\
     logger.cpp \
     workthread.cpp \
     tcpconnection.cpp \
-    accptor.cpp
 
 HEADERS  += mainwindow.h \
     relayhub.h \
@@ -29,6 +28,6 @@ HEADERS  += mainwindow.h \
     logger.h \
     workthread.h \
     tcpconnection.h \
-    accptor.h
+    tunnelclient.h
 
 FORMS    += mainwindow.ui

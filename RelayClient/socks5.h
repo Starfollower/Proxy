@@ -10,6 +10,7 @@ class Socks5
 public:
     Socks5();
     bool communication(const std::shared_ptr<QTcpSocket> &socketPtr);
+    bool communication(QTcpSocket &socket);
     inline ADDRTYPE dstAddrType() { return _ATYPType; }
 private:
     char _IPV4[4];
