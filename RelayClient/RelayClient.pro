@@ -18,7 +18,7 @@ SOURCES += main.cpp\
     tcpconnthread.cpp \
     socks5.cpp \
     logger.cpp \
-    workthread.cpp \
+    tcpworker.cpp \
     tcpconnection.cpp \
 
 HEADERS  += mainwindow.h \
@@ -26,7 +26,7 @@ HEADERS  += mainwindow.h \
     tcpconnthread.h \
     socks5.h \
     logger.h \
-    workthread.h \
+    tcpworker.h \
     tcpconnection.h \
     tunnelclient.h
 

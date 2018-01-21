@@ -1,21 +1,21 @@
-#include "workthread.h"
+#include "tcpworker.h"
 #include "socks5.h"
 #include "tcpconnection.h"
+#include <QTextCodec>
 
 using namespace std::placeholders;
 
-WorkThread::WorkThread()
-{
-
-}
-
-void WorkThread::run()
+TcpWorker::TcpWorker()
 {
 	_socketsMapSptr = std::make_shared<std::map<qintptr, std::shared_ptr<TcpConnection>>>();
-	this->exec();
 }
 
-void WorkThread::handleNewConnection(qintptr socketfd)
+//void TcpWorker::run()
+//{
+//	this->exec();
+//}
+
+void TcpWorker::handleNewConnection(qintptr socketfd)
 {
 	std::shared_ptr<QTcpSocket> curSocketSptr = std::make_shared<QTcpSocket>();
     //QTcpSocket curSocket;
@@ -31,10 +31,10 @@ void WorkThread::handleNewConnection(qintptr socketfd)
     }
 
     std::shared_ptr<TcpConnection> connectionSptr = std::make_shared<TcpConnection>(curSocketSptr);
-	//std::function<void(TcpConnection &)> f = std::bind(&WorkThread::handleMessage, this, _1);
-	//connection.setReadCallback(std::bind(&WorkThread::hanleMessage, this, _1));
+	//std::function<void(TcpConnection &)> f = std::bind(&TcpWorker::handleMessage, this, _1);
+	//connection.setReadCallback(std::bind(&TcpWorker::hanleMessage, this, _1));
 	//connection.setReadCallback(f);
-	//connectionSptr->setReadCallback(std::bind(&WorkThread::handleMessage, _1));
+	//connectionSptr->setReadCallback(std::bind(&TcpWorker::handleMessage, _1));
 	connectionSptr->setReadCallback(std::bind(handleMessage2, _1));
     _socketsMapSptr->insert(std::make_pair(socketfd, connectionSptr));
 	//_testMap.insert(std::make_pair(1, 2));
@@ -45,14 +45,15 @@ void WorkThread::handleNewConnection(qintptr socketfd)
 void handleMessage2(std::shared_ptr<TcpConnection> connection)
 {
 	auto message = connection->readAll();
+	QString s = QTextCodec::codecForName("UTF-8")->toUnicode(message);
 }
 
-void WorkThread::handleClose(qintptr socketfd)
+void TcpWorker::handleClose(qintptr socketfd)
 {
     _socketsMapSptr->erase(socketfd);
 }
 
-void WorkThread::handleMessage(std::shared_ptr<TcpConnection> connection)
+void TcpWorker::handleMessage(std::shared_ptr<TcpConnection> connection)
 {
 	auto message = connection->readAll();
 }

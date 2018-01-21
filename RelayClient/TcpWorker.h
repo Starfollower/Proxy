@@ -1,5 +1,5 @@
-#ifndef WORKTHREAD_H
-#define WORKTHREAD_H
+#ifndef TCPWORKER_H
+#define TCPWORKER_H
 
 #include <QThread>
 #include <QTcpSocket>
@@ -23,14 +23,14 @@
 class TcpConnection;
 void handleMessage2(std::shared_ptr<TcpConnection> connection);
 
-class WorkThread : public QThread
+class TcpWorker : public QObject 
 {
     Q_OBJECT
 
 public:
-    WorkThread();
-    void run() Q_DECL_OVERRIDE;
-	void setName(const char *str) { this->setObjectName(str); }
+    TcpWorker();
+    //void run() Q_DECL_OVERRIDE;
+	//void setName(const char *str) { this->setObjectName(str); }
 public slots:
     void handleNewConnection(qintptr socket);
 	void handleClose(qintptr);
@@ -42,4 +42,4 @@ private:
 	//std::map<qintptr, TcpConnection> _socketMap;
 };
 
-#endif // WORKTHREAD_H
+#endif // TCPWORKER_H

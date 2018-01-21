@@ -2,7 +2,7 @@
 #define RELAYHUB_H
 
 #include "tcpconnthread.h"
-#include "workthread.h"
+#include "tcpworker.h"
 
 #include <QObject>
 #include <QTcpServer>
@@ -11,6 +11,7 @@
 #include <vector>
 #include <map>
 
+Q_DECLARE_METATYPE(qintptr)
 
 class RelayHub : public QTcpServer
 {
@@ -39,7 +40,8 @@ private:
     QTcpSocket _backend;
     QString _statusStr;
     //std::map<int, std::shared_ptr<TcpConnThread>> _connThreadMap;
-    std::map<int, std::shared_ptr<WorkThread>> _workThreadMap;
+	std::map<int, std::shared_ptr<QThread>> _threadMap;
+    std::map<int, std::shared_ptr<TcpWorker>> _workerMap;
 };
 
 #endif // RELAYHUB_H
