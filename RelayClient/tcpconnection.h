@@ -1,6 +1,8 @@
 #ifndef TCPCONNECTION_H
 #define TCPCONNECTION_H
 
+#include "CallBacks.h"
+
 #include <QTcpSocket>
 #include <memory>
 
@@ -11,7 +13,6 @@ class TcpConnection : public QObject, public std::enable_shared_from_this<TcpCon
     Q_OBJECT
 
 public:
-	using ReadCallback = std::function<void(std::shared_ptr<TcpConnection>)>;
 	//using WriteCallback = std::function<void(TcpConnection &)>;
 public:
     TcpConnection(const std::shared_ptr<QTcpSocket> &);

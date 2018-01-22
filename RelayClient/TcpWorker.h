@@ -1,6 +1,8 @@
 #ifndef TCPWORKER_H
 #define TCPWORKER_H
 
+#include "CallBacks.h"
+
 #include <QThread>
 #include <QTcpSocket>
 #include <vector>
@@ -32,6 +34,7 @@ public:
 	~TcpWorker();
     //void run() Q_DECL_OVERRIDE;
 	//void setName(const char *str) { this->setObjectName(str); }
+    void setReadCallback(std::function<void(std::shared_ptr<TcpConnection>)> cb) { _readCb = cb; }
 public slots:
     void handleNewConnection(qintptr socket);
 	void handleClose(qintptr);
@@ -39,6 +42,7 @@ public slots:
 private:
 	void handleMessage(std::shared_ptr<TcpConnection>);
 private:
+	ReadCallback _readCb;
     std::shared_ptr<std::map<qintptr, std::shared_ptr<TcpConnection>>> _socketsMapSptr;
 	std::map<qintptr, int> _testMap;
 	//std::map<qintptr, TcpConnection> _socketMap;

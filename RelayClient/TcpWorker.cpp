@@ -35,7 +35,8 @@ void TcpWorker::handleNewConnection(qintptr socketfd)
 	//connection.setReadCallback(std::bind(&TcpWorker::hanleMessage, this, _1));
 	//connection.setReadCallback(f);
 	//connectionSptr->setReadCallback(std::bind(&TcpWorker::handleMessage, _1));
-	connectionSptr->setReadCallback(std::bind(handleMessage2, _1));
+	if (_readCb != nullptr)
+		connectionSptr->setReadCallback(std::bind(_readCb, _1));
     _socketsMapSptr->insert(std::make_pair(socketfd, connectionSptr));
 	//_testMap.insert(std::make_pair(1, 2));
 	//_socketMap.insert(std::make_pair(socketfd, connection));
