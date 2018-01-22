@@ -45,7 +45,8 @@ void TcpWorker::handleNewConnection(qintptr socketfd)
 void handleMessage2(std::shared_ptr<TcpConnection> connection)
 {
 	auto message = connection->readAll();
-	QString s = QTextCodec::codecForName("UTF-8")->toUnicode(message);
+	QString qs = QTextCodec::codecForName("UTF-8")->toUnicode(message);
+	std::string s = qs.toStdString();
 }
 
 void TcpWorker::handleClose(qintptr socketfd)
@@ -56,6 +57,16 @@ void TcpWorker::handleClose(qintptr socketfd)
 void TcpWorker::handleMessage(std::shared_ptr<TcpConnection> connection)
 {
 	auto message = connection->readAll();
+}
+
+void TcpWorker::closeSockets()
+{
+	_socketsMapSptr->clear();
+}
+
+TcpWorker::~TcpWorker()
+{
+	closeSockets();
 }
 
 //WorkFunc::WorkFunc()

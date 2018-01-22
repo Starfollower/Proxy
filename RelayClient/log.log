@@ -45,3 +45,12 @@
 [01/21/18 11:21:41]#Socks5::communication()-14#out of time! (g:\projects\proxy\relayclient\socks5.cpp)
 [01/21/18 11:21:42]#Socks5::communication()-14#out of time! (g:\projects\proxy\relayclient\socks5.cpp)
 [01/21/18 11:21:43]#Socks5::communication()-14#out of time! (g:\projects\proxy\relayclient\socks5.cpp)
+[01/21/18 17:33:14][01/21/18 17:33:14#]#Socks5::communication()-Socks5::communication()-43#out of time! (g:\projects\proxy\relayclient\socks5.cpp)43
+#out of time! (g:\projects\proxy\relayclient\socks5.cpp)
+[01/21/18 17:43:07]#Socks5::communication()-20#Receive wrong format data from client! (g:\projects\proxy\relayclient\socks5.cpp)
+[01/21/18 17:43:52]#Socks5::communication()-20#Receive wrong format data from client! (g:\projects\proxy\relayclient\socks5.cpp)
+[01/21/18 17:43:52]#Socks5::communication()-43#out of time! (g:\projects\proxy\relayclient\socks5.cpp)
+[01/22/18 20:42:25]#Socks5::communication()-14#out of time! (g:\projects\proxy\relayclient\socks5.cpp)
+[01/22/18 21:11:09]#Socks5::communication()-20#Receive wrong format data from client! (g:\projects\proxy\relayclient\socks5.cpp)
+[01/22/18 21:11:11]#Socks5::communication()-20#Receive wrong format data from client! (g:\projects\proxy\relayclient\socks5.cpp)
+[01/22/18 21:11:11]#Socks5::communication()-14#out of time! (g:\projects\proxy\relayclient\socks5.cpp)

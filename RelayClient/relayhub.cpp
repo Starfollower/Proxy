@@ -41,6 +41,7 @@ void RelayHub::start()
 		std::shared_ptr<TcpWorker> workerSptr = std::make_shared<TcpWorker>();
         _workerMap.insert(std::make_pair(i, workerSptr));
 		_threadMap.insert(std::make_pair(i, threadSptr));
+		connect(this, &RelayHub::exit, workerSptr.get(), &TcpWorker::closeSockets);
 		workerSptr->moveToThread(threadSptr.get());
 		threadSptr->start();
     }
@@ -72,5 +73,17 @@ void RelayHub::connThreadExited(int sockfd)
 RelayHub::~RelayHub()
 {
     this->close();
+	emit exit();
+	//_workerMap.clear();
+	for (int i = 0; i < _threadMap.size(); ++i) {
+		_threadMap.at(i)->quit();
+	}
+	for (int i = 0; i < _threadMap.size(); ++i) {
+		if (!_threadMap.at(i)->isFinished()) {
+			_threadMap.at(i)->wait(5000);
+			_threadMap.at(i)->terminate();
+		}
+	}
+
     //_connThreadMap.clear();
 }

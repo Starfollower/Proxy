@@ -29,11 +29,13 @@ class TcpWorker : public QObject
 
 public:
     TcpWorker();
+	~TcpWorker();
     //void run() Q_DECL_OVERRIDE;
 	//void setName(const char *str) { this->setObjectName(str); }
 public slots:
     void handleNewConnection(qintptr socket);
 	void handleClose(qintptr);
+	void closeSockets();
 private:
 	void handleMessage(std::shared_ptr<TcpConnection>);
 private:

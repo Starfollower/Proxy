@@ -26,6 +26,7 @@ public:
 signals:
     void statusChanged(QString statusStr);
     void newConnection(qintptr handle);
+	void exit();
 protected:
     void incomingConnection(qintptr handle) Q_DECL_OVERRIDE;
 private slots:

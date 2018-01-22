@@ -22,6 +22,11 @@ void TcpConnection::handleError()
 		// TODO: add log;
 }
 
+TcpConnection::~TcpConnection()
+{
+	_socket->close();
+}
+
 //void TcpConnection::handleNewConnection(qintptr socketfd)
 //{
 //    QTcpSocket curSocket = QTcpSocket(this);

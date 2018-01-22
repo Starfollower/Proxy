@@ -15,6 +15,7 @@ public:
 	//using WriteCallback = std::function<void(TcpConnection &)>;
 public:
     TcpConnection(const std::shared_ptr<QTcpSocket> &);
+	~TcpConnection();
     void setReadCallback(std::function<void(std::shared_ptr<TcpConnection>)> cb) { _readCb = cb; }
 	QByteArray readAll() { return _socket->readAll(); }
 	std::shared_ptr<TcpConnection> getSharedPtr() { return shared_from_this(); }
