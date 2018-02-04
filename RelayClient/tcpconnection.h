@@ -7,7 +7,6 @@
 #include <memory>
 
 //using ConnectionCallback = std::function<void (const QTcpSocket &)>;
-
 class TcpConnection : public QObject, public std::enable_shared_from_this<TcpConnection>
 {
     Q_OBJECT

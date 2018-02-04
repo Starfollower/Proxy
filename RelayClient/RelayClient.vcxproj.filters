@@ -82,10 +82,19 @@
     <ClCompile Include="Release\moc_mainwindow.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_TcpWorker.cpp">
+    <ClCompile Include="tunnelClient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_tunnelclient.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="TcpWorker.cpp">
+    <ClCompile Include="Release\moc_tunnelclient.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_acceptor.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="acceptor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -108,9 +117,6 @@
     <CustomBuild Include="tcpconnthread.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <ClInclude Include="tunnelclient.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
@@ -125,7 +131,10 @@
     <CustomBuild Include="release\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="TcpWorker.h">
+    <CustomBuild Include="tunnelclient.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="acceptor.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>

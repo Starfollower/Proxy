@@ -38,10 +38,10 @@ void RelayHub::start()
     for (int i = 0; i < _threadNum; ++i) {
         std::shared_ptr<QThread> threadSptr = std::make_shared<QThread>();
 		threadSptr->setObjectName("Server work thread");
-		std::shared_ptr<TcpWorker> workerSptr = std::make_shared<TcpWorker>();
+		std::shared_ptr<Acceptor> workerSptr = std::make_shared<Acceptor>();
         _workerMap.insert(std::make_pair(i, workerSptr));
 		_threadMap.insert(std::make_pair(i, threadSptr));
-		connect(this, &RelayHub::exit, workerSptr.get(), &TcpWorker::closeSockets);
+		connect(this, &RelayHub::exit, workerSptr.get(), &Acceptor::closeSockets);
 		workerSptr->moveToThread(threadSptr.get());
 		threadSptr->start();
     }
@@ -52,8 +52,8 @@ void RelayHub::incomingConnection(qintptr socketfd)
 	if (_workerMap.empty()) return;
 	if (_assignThreadNum >= _workerMap.size())
 		_assignThreadNum = 0;
-	std::shared_ptr<TcpWorker> workerSptr = _workerMap.at(_assignThreadNum);
-	connect(this, &RelayHub::newConnection, workerSptr.get(), &TcpWorker::handleNewConnection);
+	std::shared_ptr<Acceptor> workerSptr = _workerMap.at(_assignThreadNum);
+	connect(this, &RelayHub::newConnection, workerSptr.get(), &Acceptor::handleNewConnection);
 	++_assignThreadNum;
 	emit newConnection(socketfd);
     //connect(this, &RelayHub::newConnection, _workThreadMap[_assignThreadNum]->getWorkFuncPtr(), &WorkFunc::registSocket);

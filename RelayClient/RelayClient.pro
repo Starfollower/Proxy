@@ -20,6 +20,7 @@ SOURCES += main.cpp\
     logger.cpp \
     tcpworker.cpp \
     tcpconnection.cpp \
+    tunnelclient.cpp
 
 HEADERS  += mainwindow.h \
     relayhub.h \

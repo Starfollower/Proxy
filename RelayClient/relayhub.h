@@ -2,7 +2,7 @@
 #define RELAYHUB_H
 
 #include "tcpconnthread.h"
-#include "tcpworker.h"
+#include "acceptor.h"
 
 #include <QObject>
 #include <QTcpServer>
@@ -42,7 +42,7 @@ private:
     QString _statusStr;
     //std::map<int, std::shared_ptr<TcpConnThread>> _connThreadMap;
 	std::map<int, std::shared_ptr<QThread>> _threadMap;
-    std::map<int, std::shared_ptr<TcpWorker>> _workerMap;
+    std::map<int, std::shared_ptr<Acceptor>> _workerMap;
 };
 
 #endif // RELAYHUB_H

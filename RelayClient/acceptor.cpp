@@ -1,11 +1,11 @@
-#include "tcpworker.h"
+#include "acceptor.h"
 #include "socks5.h"
 #include "tcpconnection.h"
 #include <QTextCodec>
 
 using namespace std::placeholders;
 
-TcpWorker::TcpWorker()
+Acceptor::Acceptor()
 {
 	_socketsMapSptr = std::make_shared<std::map<qintptr, std::shared_ptr<TcpConnection>>>();
 }
@@ -15,7 +15,7 @@ TcpWorker::TcpWorker()
 //	this->exec();
 //}
 
-void TcpWorker::handleNewConnection(qintptr socketfd)
+void Acceptor::handleNewConnection(qintptr socketfd)
 {
 	std::shared_ptr<QTcpSocket> curSocketSptr = std::make_shared<QTcpSocket>();
     //QTcpSocket curSocket;
@@ -50,22 +50,22 @@ void handleMessage2(std::shared_ptr<TcpConnection> connection)
 	std::string s = qs.toStdString();
 }
 
-void TcpWorker::handleClose(qintptr socketfd)
+void Acceptor::handleClose(qintptr socketfd)
 {
     _socketsMapSptr->erase(socketfd);
 }
 
-void TcpWorker::handleMessage(std::shared_ptr<TcpConnection> connection)
+void Acceptor::handleMessage(std::shared_ptr<TcpConnection> connection)
 {
 	auto message = connection->readAll();
 }
 
-void TcpWorker::closeSockets()
+void Acceptor::closeSockets()
 {
 	_socketsMapSptr->clear();
 }
 
-TcpWorker::~TcpWorker()
+Acceptor::~Acceptor()
 {
 	closeSockets();
 }
